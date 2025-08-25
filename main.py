@@ -38,6 +38,17 @@ def get_weekly_secret():
         pass
     return generate_weekly_secret()
 
+@app.route('/')
+def home():
+    """Home page showing running status"""
+    current_week = datetime.utcnow().strftime("%Y-W%U")
+    return f"""
+    <h1>PR Approver Service</h1>
+    <p>Status: <strong>Running</strong></p>
+    <p>Current Week: {current_week}</p>
+    <p>Use the /approve endpoint to approve PRs with the weekly secret.</p>
+    """
+
 @app.route('/approve', methods=['POST'])
 def approve_pr():
     data = request.json
@@ -72,6 +83,6 @@ def approve_pr():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # Print current week's secret for sharing
+    # Print current week's secret for sharing (local use only)
     print("This week's secret:", get_weekly_secret())
     app.run(host='0.0.0.0', port=5000)
