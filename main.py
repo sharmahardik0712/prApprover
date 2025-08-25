@@ -85,4 +85,5 @@ def approve_pr():
 if __name__ == '__main__':
     # Print current week's secret for sharing (local use only)
     print("This week's secret:", get_weekly_secret())
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050)
+
